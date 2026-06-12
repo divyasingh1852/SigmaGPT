@@ -63,7 +63,7 @@ export const Sidebar = () => {
   const deleteThread = async (threadId) => {
     try {
       // const response = await fetch(`http://localhost:8080/api/thread/${threadId}`, { method: "DELETE" });
-      const response = await fetch(`${server.prod}/api/thread/${threadId}`, { method: "DELETE" });
+      const response = await fetch(`${server}/api/thread/${threadId}`, { method: "DELETE" });
 
       const res = await response.json();
       console.log(res);
