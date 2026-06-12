@@ -4,7 +4,7 @@ import cors from "cors";
 import fetch from "node-fetch"; // npm install node-fetch
 import mongoose from "mongoose";
 import chatRoutes from "./routes/chat.js";
-import authRoutes from "./routes/auth.js";
+import authRoutes from "./routes/Auth.js";
 
 const app = express();
 const PORT = 8080;
