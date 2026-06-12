@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./AuthForm.css";
+import server from "./environment.js";
+
 
 function Register({ onClose }) {
   const [username, setUsername] = useState("");
@@ -10,7 +12,9 @@ function Register({ onClose }) {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:8080/api/auth/register", {
+      // const res = await fetch("http://localhost:8080/api/auth/register", {
+         const res = await fetch(`${server.prod}/api/auth/register`, {
+
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, email, password }),

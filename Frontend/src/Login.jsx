@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./AuthForm.css";
+import server from "./environment.js";
+
 
 function Login({ onClose, onLoginSuccess }) {
   const [email, setEmail] = useState("");
@@ -9,7 +11,8 @@ function Login({ onClose, onLoginSuccess }) {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:8080/api/auth/login", {
+      // const res = await fetch("http://localhost:8080/api/auth/login", {
+      const res = await fetch(`${server.prod}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
