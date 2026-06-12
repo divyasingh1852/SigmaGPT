@@ -1,0 +1,32 @@
+#mic {
+  border: none;
+  background: transparent;
+ color: var(--text-color); 
+
+  font-size: 20px;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: 0.3s;
+}
+
+#mic:hover {
+  color: #19c37d;
+  transform: scale(1.1);
+}
+
+.listening {
+  color: #19c37d;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}

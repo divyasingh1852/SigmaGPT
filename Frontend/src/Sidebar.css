@@ -1,0 +1,204 @@
+.sidebar {
+    /* background-color: #171717;
+    color: #b4b4b4; */
+
+     background-color: var(--bg-color);
+    color: var(--text-color);
+
+
+    height: 100vh;
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+
+    border-right: solid 1px var(--text-color); /* separator line */
+}
+
+
+button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: transparent;
+    /* border: solid 0.5px rgba(255, 255, 255, 0.5) !important; */
+
+    border: solid 0.5px var(--text-color) !important;
+
+    cursor: pointer;
+
+}
+
+
+.logo {
+    height: 25px;
+    width: 25px;
+    background-color: #fff;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+button span {
+    /* font-size: 20px; */
+        font-size: 12px;
+
+}
+
+button:hover {
+    background-color: rgba(180, 180, 180, 0.05);
+}
+
+.history {
+    margin: 10px;
+    padding: 10px;
+    height: 100%;
+     flex-grow: 1;   /* fills vertical space */
+  overflow-y: auto; /* optional: scroll if too many threads */
+}
+
+
+/* Chrome, Edge, Safari */
+.history::-webkit-scrollbar {
+  width: 8px;
+}
+
+.history::-webkit-scrollbar-track {
+  background: var(--bg-color); /* matches theme background */
+}
+
+.history::-webkit-scrollbar-thumb {
+  background-color: var(--text-color);
+  border-radius: 4px;
+}
+
+/* Firefox */
+.history {
+  scrollbar-width: thin;
+  scrollbar-color: var(--text-color) var(--bg-color);
+}
+
+
+
+/* New Chat button */
+.new-chat-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: var(--bg-color);
+  color: var(--text-color);              
+  border: 0.5px solid var(--text-color);
+  cursor: pointer;
+}
+
+.new-chat-btn:hover {
+  background-color: rgba(180, 180, 180, 0.1);
+}
+
+
+
+.history li {
+    list-style-type: none;
+    cursor: pointer;
+    padding: 2px 5px;
+    margin-bottom: 0.3rem;
+    font-size: 14px;
+    border: solid 10px transparent;
+    position: relative;
+}
+
+.history li:hover {
+    background-color: rgba(180, 180, 180, 0.05);
+    border-radius: 10px;
+}
+
+
+/* Light mode hover */
+[data-theme="light"] .history li:hover {
+  background-color: rgba(0, 0, 0, 0.1);   
+  border-radius: 10px;
+}
+
+/* Dark mode hover */
+[data-theme="dark"] .history li:hover {
+  background-color: rgba(255, 255, 255, 0.1); 
+  border-radius: 10px;
+}
+
+
+
+/* 
+.sign {
+    padding: 10px;
+    font-size: 12px;
+    text-align: center;
+    border-top: solid 0.25px rgba(255, 255, 255, 0.5);
+} */
+
+
+
+.sign {
+  margin-top: auto;          
+  font-size: 14px;
+  text-align: center;
+ border-top: solid 0.5px var(--text-color);
+  padding-top: 0.5px;         
+}
+
+
+
+.fa-trash {
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    color: var(--text-color) !important; 
+}
+
+.history li:hover .fa-trash {
+    opacity: 1;
+    color: var(--text-color);
+}
+
+.fa-trash:hover {
+    color: #f87171 !important;
+}
+
+.highlighted {
+    background-color: rgba(180, 180, 180, 0.05);
+    border-radius: 10px;
+}
+
+
+
+[data-theme="light"] .history li.highlighted {
+  background-color: rgba(0, 0, 0, 0.15);   
+  color: #000;                             
+}
+
+[data-theme="dark"] .history li.highlighted {
+  background-color: rgba(255, 255, 255, 0.15); 
+  color: #fff;                                
+}
+
+
+.theme-toggle {
+  margin: 10px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background: var(--text-color);
+  color: var(--bg-color);
+  font-size: 12px;
+}
+
+.theme-toggle:hover {
+  opacity: 0.8;
+}
+
