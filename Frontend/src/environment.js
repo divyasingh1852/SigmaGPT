@@ -1,9 +1,6 @@
-let IS_PROD = true;
+// Vite exposes environment variables that start with VITE_
+// We set VITE_API_URL in .env (local) and in Render (production)
 
-const server = IS_PROD ? 
-    "https://sigma-backend-j8ja.onrender.com" :
-
-    "http://localhost:8080"
-
+const server = import.meta.env.VITE_API_URL;
 
 export default server;
