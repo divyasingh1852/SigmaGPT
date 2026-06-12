@@ -17,7 +17,7 @@ export const Sidebar = () => {
   const getAllThreads = async () => {
     try {
       // const response = await fetch("http://localhost:8080/api/thread");
-        const response = await fetch(`${server.prod}/api/thread`);
+        const response = await fetch(`${server}/api/thread`);
 
       const res = await response.json();
       const filteredData = res.map(thread => ({
@@ -49,7 +49,7 @@ export const Sidebar = () => {
       if (!token) return;
 
       // const response = await fetch(`http://localhost:8080/api/thread/${newThreadId}`);
-         const response = await fetch(`${server.prod}/api/thread/${newThreadId}`);
+         const response = await fetch(`${server}/api/thread/${newThreadId}`);
 
       const res = await response.json();
       setPrevChats(res);
@@ -82,7 +82,7 @@ export const Sidebar = () => {
     <section className="sidebar">
       {/* New Chat button */}
       <button onClick={createNewChat} className="new-chat-btn">
-        <img src="src/assets/blacklogo.png" alt="gpt logo" className="logo" />
+        <img src="/blacklogo.png" alt="gpt logo" className="logo" />
         <span className="btn-text">
           <i className="fa-solid fa-plus"></i> New Chat
         </span>
