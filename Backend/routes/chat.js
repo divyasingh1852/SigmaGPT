@@ -22,20 +22,8 @@ router.post("/test", async(req, res) => {
 });
 
 
+
 //Get all threads in sorted manner or most recent manner
-// router.get("/thread", async(req, res) => {
-//     try {
-//         const threads = await Thread.find({}).sort({updatedAt: -1});
-//         //descending order of updatedAt...most recent data on top
-//         res.json(threads);
-//     } catch(err) {
-//         console.log(err);
-//         res.status(500).json({error: "Failed to fetch threads"});
-//     }
-// });
-
-
-
 router.get("/thread", authMiddleware, async (req, res) => {
   try {
     const threads = await Thread.find({ userId: req.userId }).sort({ updatedAt: -1 });
@@ -46,23 +34,6 @@ router.get("/thread", authMiddleware, async (req, res) => {
 });
 
 
-
-// router.get("/thread/:threadId", authMiddleware, async(req, res) => {
-//     const {threadId} = req.params;
-
-//     try {
-//         const thread = await Thread.findOne({threadId});
-
-//         if(!thread) {
-//             res.status(404).json({error: "Thread not found"});
-//         }
-
-//         res.json(thread.messages);
-//     } catch(err) {
-//         console.log(err);
-//         res.status(500).json({error: "Failed to fetch chat"});
-//     }
-// });
 
 
 router.get("/thread/:threadId", authMiddleware, async (req, res) => {
@@ -97,41 +68,6 @@ router.delete("/thread/:threadId", authMiddleware, async (req, res) => {
     }
 });
 
-
-
-// router.post("/chat", async(req, res) => {
-//     const {threadId, message} = req.body;
-
-//     if(!threadId || !message) {
-//         res.status(400).json({error: "missing required fields"});
-//     }
-
-//     try {
-//         let thread = await Thread.findOne({threadId});
-
-//         if(!thread) {
-//             //create a new thread in Db
-//             thread = new Thread({
-//                 threadId,
-//                 title: message,
-//                 messages: [{role: "user", content: message}]
-//             });
-//         } else {
-//             thread.messages.push({role: "user", content: message});
-//         }
-
-//         const assistantReply = await getOpenAIAPIResponse(message);
-
-//         thread.messages.push({role: "assistant", content: assistantReply});
-//         thread.updatedAt = new Date();
-
-//         await thread.save();
-//         res.json({reply: assistantReply});
-//     } catch(err) {
-//         console.log(err);
-//         res.status(500).json({error: "something went wrong"});
-//     }
-// });
 
 
 router.post("/chat", authMiddleware, async (req, res) => {

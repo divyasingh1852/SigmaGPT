@@ -27,7 +27,7 @@ const ThreadSchema = new mongoose.Schema({
         default: "New Chat"
     },
     messages: [MessageSchema],
-    userId: { // NEW FIELD
+    userId: { 
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true
