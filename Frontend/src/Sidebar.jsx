@@ -60,23 +60,57 @@ export const Sidebar = () => {
     }
   };
 
+  // const deleteThread = async (threadId) => {
+  //   try {
+  //     // const response = await fetch(`http://localhost:8080/api/thread/${threadId}`, { method: "DELETE" });
+  //     const response = await fetch(`${server}/api/thread/${threadId}`, { method: "DELETE" });
+
+  //     const res = await response.json();
+  //     console.log(res);
+
+  //     setAllThreads(prev => prev.filter(thread => thread.threadId !== threadId));
+
+  //     if (threadId === currThreadId) {
+  //       createNewChat();
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+
   const deleteThread = async (threadId) => {
-    try {
-      // const response = await fetch(`http://localhost:8080/api/thread/${threadId}`, { method: "DELETE" });
-      const response = await fetch(`${server}/api/thread/${threadId}`, { method: "DELETE" });
+  try {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("You must be logged in to delete threads.");
+      return;
+    }
 
-      const res = await response.json();
-      console.log(res);
+    const response = await fetch(`${server}/api/thread/${threadId}`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
+      }
+    });
 
+    const res = await response.json();
+    console.log(res);
+
+    if (response.ok) {
       setAllThreads(prev => prev.filter(thread => thread.threadId !== threadId));
-
       if (threadId === currThreadId) {
         createNewChat();
       }
-    } catch (err) {
-      console.log(err);
+    } else {
+      alert(res.error || "Failed to delete thread");
     }
-  };
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 
   return (
     <section className="sidebar">
