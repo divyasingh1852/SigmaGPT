@@ -14,21 +14,51 @@ export const Sidebar = () => {
     theme, toggleTheme   
   } = useContext(MyContext);
 
-  const getAllThreads = async () => {
-    try {
-      // const response = await fetch("http://localhost:8080/api/thread");
-        const response = await fetch(`${server}/api/thread`);
 
-      const res = await response.json();
-      const filteredData = res.map(thread => ({
-        threadId: thread.threadId,
-        title: thread.title
-      }));
-      setAllThreads(filteredData);
-    } catch (err) {
-      console.log(err);
+  // const getAllThreads = async () => {
+  //   try {
+  //     // const response = await fetch("http://localhost:8080/api/thread");
+  //     const response = await fetch(`${server}/api/thread`);
+
+  //     const res = await response.json();
+  //     const filteredData = res.map(thread => ({
+  //       threadId: thread.threadId,
+  //       title: thread.title
+  //     }));
+  //     setAllThreads(filteredData);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+
+
+  const getAllThreads = async () => {
+  try {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("You must be logged in to view threads.");
+      return;
     }
-  };
+
+    const response = await fetch(`${server}/api/thread`, {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    });
+
+    const res = await response.json();
+    const filteredData = res.map(thread => ({
+      threadId: thread.threadId,
+      title: thread.title
+    }));
+    setAllThreads(filteredData);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 
   useEffect(() => {
     getAllThreads();
@@ -42,23 +72,51 @@ export const Sidebar = () => {
     setPrevChats([]);
   };
 
-  const changeThread = async (newThreadId) => {
-    setCurrThreadId(newThreadId);
-    try {
-      const token = localStorage.getItem("token");
-      if (!token) return;
+  
+  // const changeThread = async (newThreadId) => {
+  //   setCurrThreadId(newThreadId);
+  //   try {
+  //     const token = localStorage.getItem("token");
+  //     if (!token) return;
 
-      // const response = await fetch(`http://localhost:8080/api/thread/${newThreadId}`);
-         const response = await fetch(`${server}/api/thread/${newThreadId}`);
+  //     // const response = await fetch(`http://localhost:8080/api/thread/${newThreadId}`);
+  //        const response = await fetch(`${server}/api/thread/${newThreadId}`);
 
-      const res = await response.json();
-      setPrevChats(res);
-      setNewChat(false);
-      setReply(null);
-    } catch (err) {
-      console.log(err);
+  //     const res = await response.json();
+  //     setPrevChats(res);
+  //     setNewChat(false);
+  //     setReply(null);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+
+   const changeThread = async (newThreadId) => {
+  setCurrThreadId(newThreadId);
+  try {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("You must be logged in to view this thread.");
+      return;
     }
-  };
+
+    const response = await fetch(`${server}/api/thread/${newThreadId}`, {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    });
+
+    const res = await response.json();
+    setPrevChats(res);
+    setNewChat(false);
+    setReply(null);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 
   // const deleteThread = async (threadId) => {
   //   try {
