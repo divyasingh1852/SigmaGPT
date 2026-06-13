@@ -15,24 +15,6 @@ export const Sidebar = () => {
   } = useContext(MyContext);
 
 
-  // const getAllThreads = async () => {
-  //   try {
-  //     // const response = await fetch("http://localhost:8080/api/thread");
-  //     const response = await fetch(`${server}/api/thread`);
-
-  //     const res = await response.json();
-  //     const filteredData = res.map(thread => ({
-  //       threadId: thread.threadId,
-  //       title: thread.title
-  //     }));
-  //     setAllThreads(filteredData);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
-
-
   const getAllThreads = async () => {
   try {
     const token = localStorage.getItem("token");
@@ -72,27 +54,9 @@ export const Sidebar = () => {
     setPrevChats([]);
   };
 
-  
-  // const changeThread = async (newThreadId) => {
-  //   setCurrThreadId(newThreadId);
-  //   try {
-  //     const token = localStorage.getItem("token");
-  //     if (!token) return;
-
-  //     // const response = await fetch(`http://localhost:8080/api/thread/${newThreadId}`);
-  //        const response = await fetch(`${server}/api/thread/${newThreadId}`);
-
-  //     const res = await response.json();
-  //     setPrevChats(res);
-  //     setNewChat(false);
-  //     setReply(null);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
 
 
-   const changeThread = async (newThreadId) => {
+  const changeThread = async (newThreadId) => {
   setCurrThreadId(newThreadId);
   try {
     const token = localStorage.getItem("token");
@@ -118,24 +82,6 @@ export const Sidebar = () => {
 };
 
 
-  // const deleteThread = async (threadId) => {
-  //   try {
-  //     // const response = await fetch(`http://localhost:8080/api/thread/${threadId}`, { method: "DELETE" });
-  //     const response = await fetch(`${server}/api/thread/${threadId}`, { method: "DELETE" });
-
-  //     const res = await response.json();
-  //     console.log(res);
-
-  //     setAllThreads(prev => prev.filter(thread => thread.threadId !== threadId));
-
-  //     if (threadId === currThreadId) {
-  //       createNewChat();
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
 
   const deleteThread = async (threadId) => {
   try {
@@ -145,6 +91,7 @@ export const Sidebar = () => {
       return;
     }
 
+    //const response = await fetch(`http://localhost:8080/api/thread/${threadId}`, { method: "DELETE" });
     const response = await fetch(`${server}/api/thread/${threadId}`, {
       method: "DELETE",
       headers: {

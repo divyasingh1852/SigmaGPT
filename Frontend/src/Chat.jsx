@@ -15,14 +15,14 @@ function Chat() {
   const [latestReply, setLatestReply] = useState(null);
 
   useEffect(() => {
-        if(reply === null) {
-            setLatestReply(null); //prevchat load
+        if(!reply || typeof reply !== "string") {
+            setLatestReply(null); 
             return;
         }
 
         if(!prevChats?.length) return;
 
-        const content = reply.split(" "); //individual words
+        const content = reply.split(" "); 
 
         let idx = 0;
         const interval = setInterval(() => {
