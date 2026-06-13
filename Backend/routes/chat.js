@@ -1,6 +1,7 @@
 import express from "express";
 import Thread from "../models/Thread.js";
 import getOpenAIAPIResponse from "../utils/openai.js";
+import authMiddleware from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
@@ -52,7 +53,7 @@ router.get("/thread/:threadId", async(req, res) => {
 });
 
 
-router.delete("/thread/:threadId", async (req, res) => {
+router.delete("/thread/:threadId", authMiddleware, async (req, res) => {
     const {threadId} = req.params;
 
     try {
